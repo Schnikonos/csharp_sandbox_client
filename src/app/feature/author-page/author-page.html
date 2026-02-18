@@ -1,0 +1,14 @@
+<div>
+  <h1>Author Management</h1>
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput [(ngModel)]="authorName">
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Surname</mat-label>
+    <input matInput [(ngModel)]="authorSurname">
+  </mat-form-field>
+  <button matButton="filled" (click)="addAuthor()">Add</button>
+  <button matButton="filled" (click)="findAuthors()">Refresh</button>
+  <app-author-list [authors]="(authors$ | async) ?? []" (authorDeleted)="onAuthorDeleted()"></app-author-list>
+</div>

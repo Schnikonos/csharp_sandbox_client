@@ -1,0 +1,18 @@
+<div>
+	<h1>Book Management</h1>
+	<mat-form-field>
+		<mat-label>Title</mat-label>
+		<input matInput [(ngModel)]="bookTitle">
+	</mat-form-field>
+	<mat-form-field>
+		<mat-label>Author</mat-label>
+		<mat-select [(ngModel)]="selectedAuthorId">
+			<mat-option *ngFor="let author of (authors$ | async) ?? []" [value]="author.id">
+				{{author.name}} {{author.surname}}
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<button matButton="filled" (click)="addBook()">Add</button>
+	<button matButton="filled" (click)="findBooks()">Refresh</button>
+	<app-book-list [books]="(books$ | async) ?? []" [authors]="(authors$ | async) ?? []" (bookDeleted)="onBookDeleted()"></app-book-list>
+</div>
