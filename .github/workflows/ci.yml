@@ -9,6 +9,10 @@ on:
       - main
 
 jobs:
+        - name: Get build datetime
+          id: datetime
+          run: echo "datetime=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_OUTPUT
+          shell: bash
   build-test-deploy:
     runs-on: ubuntu-latest
     steps:
@@ -32,15 +36,24 @@ jobs:
       - name: Build app
         run: npm run build
 
-      - name: Upload build artifact
+
+      - name: Deploy build artifact
+        uses: actions/upload-artifact@v4
+
+      - name: Get package version
+        id: pkgversion
+        run: echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
+
+      - name: Zip build output
+        run: |
+          cd dist
+          zip -r ../frontend-build-${{ steps.pkgversion.outputs.version }}-${{ steps.datetime.outputs.datetime }}.zip .
+        shell: bash
+
+      - name: Upload zipped build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-dist
-          path: dist/
+          name: frontend-build-${{ steps.pkgversion.outputs.version }}-${{ steps.datetime.outputs.datetime }}
+          path: frontend-build-${{ steps.pkgversion.outputs.version }}-${{ steps.datetime.outputs.datetime }}.zip
 
-      # Optional: Deploy step (e.g., to GitHub Pages)
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: dist/
+
