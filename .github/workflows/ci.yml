@@ -34,7 +34,7 @@ jobs:
 
       - name: Get package version
         id: pkgversion
-        run: echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
+        run: echo "version=$(node -p 'require(\"./package.json\").version')" >> $GITHUB_OUTPUT
 
       - name: Get build datetimes
         id: datetime
