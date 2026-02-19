@@ -1,5 +1,5 @@
-
-import {AfterViewInit, Component} from '@angular/core';
+import { inject } from '@angular/core';
+import {Component} from '@angular/core';
 import {BehaviorSubject, firstValueFrom} from 'rxjs';
 import {Book} from '../../shared/models/book.model';
 import {Author} from '../../shared/models/author.model';
@@ -9,7 +9,6 @@ import {MatButton} from '@angular/material/button';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import {MatOptionModule} from '@angular/material/core';
-import {NgFor} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {AsyncPipe} from '@angular/common';
 
@@ -23,7 +22,6 @@ import {AsyncPipe} from '@angular/common';
     MatInput,
     MatSelectModule,
     MatOptionModule,
-    NgFor,
     FormsModule,
     AsyncPipe
   ],
@@ -33,20 +31,21 @@ import {AsyncPipe} from '@angular/common';
 export class BookPage {
   books$: BehaviorSubject<Book[]> = new BehaviorSubject<Book[]>([]);
   authors$: BehaviorSubject<Author[]> = new BehaviorSubject<Author[]>([]);
-  bookTitle: string = '';
+  bookTitle = '';
   selectedAuthorId: number | null = null;
 
-  constructor(private bookService: BookService) {
+  private bookService = inject(BookService);
+  constructor() {
     this.findBooks();
     this.findAuthors();
   }
 
   findBooks() {
-    this.bookService.getBooks().subscribe(b => this.books$.next(b));
+    this.bookService.getBooks().subscribe((b: Book[]) => this.books$.next(b));
   }
 
   findAuthors() {
-    this.bookService.getAuthors().subscribe(a => this.authors$.next(a));
+    this.bookService.getAuthors().subscribe((a: Author[]) => this.authors$.next(a));
   }
 
   async addBook() {

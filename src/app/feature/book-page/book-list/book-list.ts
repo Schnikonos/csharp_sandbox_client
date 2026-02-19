@@ -5,7 +5,7 @@ import {BookService} from '../../../core/services/book.service';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {AsyncPipe} from '@angular/common';
+// Removed unused AsyncPipe import
 
 @Component({
   selector: 'app-book-list',

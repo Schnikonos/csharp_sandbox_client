@@ -2,7 +2,6 @@ import {inject, Injectable} from '@angular/core';
 import {Author} from '../../shared/models/author.model';
 import {Book} from '../../shared/models/book.model';
 import {HttpClient} from '@angular/common/http';
-import {BehaviorSubject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

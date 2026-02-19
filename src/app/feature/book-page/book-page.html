@@ -7,9 +7,11 @@
 	<mat-form-field>
 		<mat-label>Author</mat-label>
 		<mat-select [(ngModel)]="selectedAuthorId">
-			<mat-option *ngFor="let author of (authors$ | async) ?? []" [value]="author.id">
-				{{author.name}} {{author.surname}}
-			</mat-option>
+			@for (author of (authors$ | async) ?? []; track author.id) {
+				<mat-option [value]="author.id">
+					{{author.name}} {{author.surname}}
+				</mat-option>
+			}
 		</mat-select>
 	</mat-form-field>
 	<button matButton="filled" (click)="addBook()">Add</button>

@@ -1,5 +1,6 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {BehaviorSubject, firstValueFrom, Observable} from 'rxjs';
+import { inject } from '@angular/core';
+import {Component} from '@angular/core';
+import {BehaviorSubject, firstValueFrom} from 'rxjs';
 import {Author} from '../../shared/models/author.model';
 import {BookService} from '../../core/services/book.service';
 import {AuthorList} from './author-list/author-list';
@@ -24,15 +25,16 @@ import {AsyncPipe} from '@angular/common';
 })
 export class AuthorPage {
   authors$: BehaviorSubject<Author[]> = new BehaviorSubject<Author[]>([]);
-  authorName: string = '';
-  authorSurname: string = '';
+  authorName = '';
+  authorSurname = '';
 
-  constructor(private bookService: BookService) {
+  private bookService = inject(BookService);
+  constructor() {
     this.findAuthors();
   }
 
   findAuthors() {
-    this.bookService.getAuthors().subscribe(a => this.authors$.next(a));
+    this.bookService.getAuthors().subscribe((a: Author[]) => this.authors$.next(a));
   }
 
   async addAuthor() {

@@ -4,8 +4,9 @@ import {BookService} from '../../../core/services/book.service';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
-import {Observable} from 'rxjs';
-import {AsyncPipe} from '@angular/common';
+// Unused imports removed
+// import {Observable} from 'rxjs';
+// import {AsyncPipe} from '@angular/common';
 
 @Component({
   selector: 'app-author-list',
