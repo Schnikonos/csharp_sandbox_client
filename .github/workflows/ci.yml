@@ -40,11 +40,11 @@ jobs:
         id: pkgversion
         run: echo "version=$(node -p \"require('./package.json').version\")" >> $GITHUB_OUTPUT
 
-      - name: Get build datetime
+      - name: Get build datetimes
         id: datetime
         run: echo "datetime=$(date +'%Y%m%d-%H%M%S')" >> $GITHUB_OUTPUT
         shell: bash
-        
+
       - name: Zip build output
         run: |
           cd dist
