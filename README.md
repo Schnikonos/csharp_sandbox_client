@@ -1,60 +1,71 @@
-# Untitled
+# Untitled Angular Book & Author Management App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.1.2.
+This project is an Angular application for managing books and authors. It uses Angular Material for UI components and communicates with a backend API via a proxy configuration.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Manage books: add, list, and delete books
+- Manage authors: add, list, and delete authors
+- Material UI with navigation drawer
+- Async data loading with RxJS
+- Proxy setup for API requests (`/api`)
 
-```bash
+## Project Structure
+
+- `src/app/feature/book-page`: Book management page and book list
+- `src/app/feature/author-page`: Author management page and author list
+- `src/app/core/services`: Services for API communication
+- `src/app/shared/models`: TypeScript models for Book and Author
+- `src/app/app.html`: Main layout with navigation
+
+## Getting Started
+
+To start the development server, run:
+
+```powershell
 Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-ng serve
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Then open your browser at `http://localhost:4200/`.
 
-## Code scaffolding
+## API Proxy
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
+API requests to `/api` are proxied to `https://localhost:32775` as configured in `proxy.conf.json`.
 
 ## Building
 
-To build the project run:
+To build the project:
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Build artifacts are output to the `dist/` directory.
 
-## Running unit tests
+## Running Unit Tests
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+
+To execute unit tests:
 
 ```bash
-ng test
+npm run test
 ```
 
-## Running end-to-end tests
 
-For end-to-end (e2e) testing, run:
+## Linting
+
+To check code style and quality:
 
 ```bash
-ng e2e
+npm run lint
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## End-to-End Testing
+
+End-to-end (e2e) testing is not configured by default. You can add your preferred framework.
+
 
 ## Additional Resources
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+For more information on Angular CLI, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli).
